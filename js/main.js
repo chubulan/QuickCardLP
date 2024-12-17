@@ -44,7 +44,7 @@ function checkAllAnimationsComplete() {
         setTimeout(() => {
             startAnimation(); // Start dot color transitions
             startImageRotation(); // Start image rotation after another brief delay 
-        }, 500);
+        }, 100);
     }
 }
 
@@ -385,25 +385,50 @@ handleScroll();
 // Ham menu //
 document.addEventListener('DOMContentLoaded', function() {
     const hamburgerBtn = document.querySelector('.hamburger-menu');
+    const header = document.querySelector('.header');
     const body = document.body;
+    const mobileMenuLinks = document.querySelectorAll('.mobile-nav-links a');
 
     if (header && hamburgerBtn) {
         hamburgerBtn.addEventListener('click', function() {
-            header.classList.toggle('menu-open');
-            
-            // Toggle body scroll
-            if (header.classList.contains('menu-open')) {
-                // Disable scroll
-                body.style.overflow = 'hidden';
-            } else {
-                // Enable scroll
-                body.style.overflow = '';
-            }
-
-            this.setAttribute('aria-expanded', 
-                this.getAttribute('aria-expanded') === 'false' ? 'true' : 'false'
-            );
+            toggleMenu();
         });
+
+        // Add click event listeners to all mobile menu links
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent default scroll behavior
+                
+                // Get the target section id from the href
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    // First close the menu
+                    toggleMenu();
+                    
+                    // Then instantly scroll to the section
+                    window.scrollTo({
+                        top: targetSection.offsetTop - header.offsetHeight,
+                        behavior: "smooth"  // Use "instant" for no animation
+                    });
+                }
+            });
+        });
+    }
+
+    function toggleMenu() {
+        header.classList.toggle('menu-open');
+        
+        if (header.classList.contains('menu-open')) {
+            body.style.overflow = 'hidden';
+        } else {
+            body.style.overflow = '';
+        }
+
+        hamburgerBtn.setAttribute('aria-expanded', 
+            hamburgerBtn.getAttribute('aria-expanded') === 'false' ? 'true' : 'false'
+        );
     }
 });
 
@@ -514,12 +539,12 @@ function onMenuToggle(isOpen) {
 
 
 
-// Security cards swiping //
+// Swipe Cards //
 document.addEventListener('DOMContentLoaded', () => {
     const wrapper = document.querySelector('.security-cards-wrapper');
     const cards = document.querySelectorAll('.security-cards');
     let startX = 0;
-    let startTranslate = 0;  // Added to track initial position
+    let startTranslate = 0;
     let currentTranslate = 0;
     let isDragging = false;
     let currentIndex = 0;
@@ -540,6 +565,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateCardPosition(animate = true) {
+        // Ensure currentIndex stays within bounds
+        currentIndex = Math.max(0, Math.min(currentIndex, cards.length - 1));
         currentTranslate = -currentIndex * cardWidth;
         wrapper.style.transition = animate ? 'transform 0.3s ease-out' : 'none';
         wrapper.style.transform = `translateX(${currentTranslate}px)`;
@@ -555,15 +582,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.innerWidth >= 1024) return;
         isDragging = true;
         startX = e.touches[0].clientX;
-        startTranslate = currentTranslate;  // Store the starting position
-        
-        // Remove transition during drag
+        startTranslate = currentTranslate;
         wrapper.style.transition = 'none';
     }
 
     function drag(e) {
         if (!isDragging) return;
-        e.preventDefault();  // Prevent scrolling while dragging
+        e.preventDefault();
         
         const currentX = e.touches[0].clientX;
         const diff = currentX - startX;
@@ -574,12 +599,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const minTranslate = -cardWidth * (cards.length - 1);
         
         let finalTranslate = newTranslate;
+        
+        // Apply resistance only at the edges
         if (newTranslate > maxTranslate) {
             finalTranslate = maxTranslate + (newTranslate - maxTranslate) * 0.2;
         } else if (newTranslate < minTranslate) {
             finalTranslate = minTranslate + (newTranslate - minTranslate) * 0.2;
         }
         
+        currentTranslate = finalTranslate; // Update currentTranslate
         wrapper.style.transform = `translateX(${finalTranslate}px)`;
     }
 
@@ -589,19 +617,18 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const currentX = e.changedTouches[0].clientX;
         const diff = currentX - startX;
-
-        // Reset transition for smooth animation
-        wrapper.style.transition = 'transform 0.3s ease-out';
-
+        
         // Determine direction and update index
         if (Math.abs(diff) > cardWidth / 3) {
-            if (diff > 0 && currentIndex > 0) {
-                currentIndex--;
-            } else if (diff < 0 && currentIndex < cards.length - 1) {
-                currentIndex++;
+            if (diff > 0) { // Swiping right
+                currentIndex = Math.max(0, currentIndex - 1);
+            } else if (diff < 0) { // Swiping left
+                currentIndex = Math.min(cards.length - 1, currentIndex + 1);
             }
         }
-
+        
+        // Reset transition for smooth animation
+        wrapper.style.transition = 'transform 0.3s ease-out';
         updateCardPosition();
     }
 

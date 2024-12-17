@@ -658,7 +658,7 @@ First View
 #firstview .container {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: clamp(36px, 10vw, 60px);
 }
 /* Hero Content */
 .hero-content {
@@ -667,7 +667,7 @@ First View
     gap: 16px;
 }
 .hero-content h1 {
-    font-size: 28px;
+    font-size: 30px;
 }
 .hero-content-desc {
     font-size: 16px;
