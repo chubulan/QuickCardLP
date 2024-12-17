@@ -402,7 +402,7 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     z-index: 1000;
     transition: background-color 0.3s ease;
     display: flex;           /* Add this */
@@ -1401,13 +1401,11 @@ Features
     top: 20%;
     left: 8%;
 }
-
 .people-illust:nth-child(2) {
     top: -4%;
     left: 50%;
     transform: translateX(-50%);
 }
-
 .people-illust:nth-child(3) {
     top: 30%;
     right: 8%;
@@ -1432,8 +1430,8 @@ Features
     }
     .people-illust {
         position: absolute;
-        width: 148px;
-        height: 148px;
+        width: 132px;
+        height: 132px;
         object-fit: contain;
     }
     /* Position each illustration */
