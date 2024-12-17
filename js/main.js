@@ -128,6 +128,113 @@ window.addEventListener('beforeunload', function() {
 
 
 
+// Underline for Mobile //
+document.addEventListener('DOMContentLoaded', function() {
+    const underlines = document.querySelectorAll('.underline');
+    const keyvisual = document.querySelector('.keyvisual');
+    
+    // Wait for keyvisual animation to complete before starting underline animations
+    keyvisual.addEventListener('animationend', () => {
+        // Add a small additional delay after keyvisual appears
+        setTimeout(() => {
+            // Initial fade in for underlines
+            underlines.forEach((underline, index) => {
+                setTimeout(() => {
+                    underline.classList.add('fade-in');
+                }, index * 100);
+            });
+
+            // Start observing for highlight animation after fade-in starts
+            setTimeout(() => {
+                // Intersection Observer for highlight animation
+                const underlineObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && entry.target.classList.contains('fade-in')) {
+                            entry.target.classList.add('active');
+                        } else {
+                            entry.target.classList.remove('active');
+                        }
+                    });
+                }, {
+                    threshold: 0.7,
+                    rootMargin: '0px 0px -10% 0px'
+                });
+
+                // Start observing all underline elements
+                underlines.forEach(element => {
+                    underlineObserver.observe(element);
+                });
+            }, 500); // Wait for fade-in animations to mostly complete
+        }, 200); // Delay after keyvisual animation ends
+    }, { once: true }); // Ensure event listener only fires once
+});
+
+
+// KV image changing for Mobile //
+document.addEventListener('DOMContentLoaded', function() {
+    const images = document.querySelectorAll('.masked-image');
+    let currentIndex = 0;
+    let imageInterval;
+    let isAnimating = false;
+
+    function startImageRotation() {
+        // Ensure first image is active
+        if (!images[0].classList.contains('active')) {
+            images[0].classList.add('active');
+        }
+        
+        function nextImage() {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            // Remove active class from current image
+            images[currentIndex].classList.remove('active');
+            
+            // Move to next image
+            currentIndex = (currentIndex + 1) % images.length;
+            
+            // Add active class to next image
+            images[currentIndex].classList.add('active');
+
+            // Reset animating flag after transition
+            setTimeout(() => {
+                isAnimating = false;
+            }, 500); // Match transition duration
+        }
+
+        // Start the rotation interval
+        imageInterval = setInterval(nextImage, 3000);
+    }
+
+    // Wait for the fadeUp animation to complete before starting image rotation
+    const keyvisual = document.querySelector('.keyvisual');
+    if (keyvisual) {
+        keyvisual.addEventListener('animationend', () => {
+            // Add small delay after fadeUp completes
+            setTimeout(startImageRotation, 500);
+        }, { once: true });
+    } else {
+        // Fallback if no animation
+        setTimeout(startImageRotation, 1000);
+    }
+
+    // Handle page visibility changes
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            clearInterval(imageInterval);
+        } else {
+            startImageRotation();
+        }
+    });
+
+    // Clean up on page unload
+    window.addEventListener('beforeunload', () => {
+        if (imageInterval) {
+            clearInterval(imageInterval);
+        }
+    });
+});
+
 
 // Scroll Animation //
 document.addEventListener('DOMContentLoaded', function() {
