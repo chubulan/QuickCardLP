@@ -27,7 +27,6 @@ function startImageRotation() {
     images[0].classList.add('active');
     
     function nextImage() {
-        console.log('Changing image:', currentIndex);
         images[currentIndex].classList.remove('active');
         currentIndex = (currentIndex + 1) % images.length;
         images[currentIndex].classList.add('active');
@@ -543,23 +542,72 @@ function onMenuToggle(isOpen) {
 document.addEventListener('DOMContentLoaded', () => {
     const wrapper = document.querySelector('.security-cards-wrapper');
     const cards = document.querySelectorAll('.security-cards');
-    let startX = 0;
-    let startTranslate = 0;
-    let currentTranslate = 0;
-    let isDragging = false;
+    
     let currentIndex = 0;
-    
-    function getCardWidth() {
-        return cards[0].offsetWidth + 32; // Card width + gap
+    let startX = null;
+    let initialTranslate = 0;
+
+    // Calculate card width including margin
+    const getCardWidth = () => cards[0].offsetWidth + 32;
+
+    function updateTransform(offset, transition = false) {
+        if (transition) {
+            wrapper.style.transition = 'transform 0.3s ease';
+        } else {
+            wrapper.style.transition = 'none';
+        }
+        wrapper.style.transform = `translateX(${offset}px)`;
     }
-    
+
+    function handleTouchStart(e) {
+        console.log('Touch started');
+        startX = e.touches[0].clientX;
+        initialTranslate = -currentIndex * getCardWidth();
+        updateTransform(initialTranslate, false);
+    }
+
+    function handleTouchMove(e) {
+        if (startX === null) return;
+        
+        console.log('Touch moving');
+        e.preventDefault();
+        
+        const currentX = e.touches[0].clientX;
+        const diff = currentX - startX;
+        const newTranslate = initialTranslate + diff;
+        
+        updateTransform(newTranslate, false);
+    }
+
+    function handleTouchEnd(e) {
+        console.log('Touch ended');
+        if (startX === null) return;
+
+        const endX = e.changedTouches[0].clientX;
+        const diff = endX - startX;
+        const threshold = getCardWidth() / 3;
+
+        if (Math.abs(diff) > threshold) {
+            if (diff > 0 && currentIndex > 0) {
+                console.log('Swiping back', currentIndex);
+                currentIndex--;
+            } else if (diff < 0 && currentIndex < cards.length - 1) {
+                console.log('Swiping forward', currentIndex);
+                currentIndex++;
+            }
+        }
+
+        const finalTranslate = -currentIndex * getCardWidth();
+        updateTransform(finalTranslate, true);
+        startX = null;
+    }
+
+    // Center the first card on mobile
     function updatePadding() {
         if (window.innerWidth < 1024) {
             const containerWidth = wrapper.parentElement.offsetWidth;
             const cardWidth = cards[0].offsetWidth;
             const padding = (containerWidth - cardWidth) / 2;
-            
-            // Only apply left padding to wrapper
             wrapper.style.paddingLeft = `${padding}px`;
             wrapper.style.paddingRight = '0';
         } else {
@@ -568,82 +616,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function updateCardPosition(animate = true) {
-        const cardWidth = getCardWidth();
-        currentTranslate = -currentIndex * cardWidth;
-        
-        wrapper.style.transition = animate ? 'transform 0.3s ease-out' : 'none';
-        wrapper.style.transform = `translateX(${currentTranslate}px)`;
-    }
-
-    function dragStart(e) {
-        if (window.innerWidth >= 1024) return;
-        
-        isDragging = true;
-        startX = e.touches[0].clientX;
-        startTranslate = currentTranslate;
-        wrapper.style.transition = 'none';
-    }
-
-    function drag(e) {
-        if (!isDragging) return;
-        e.preventDefault();
-        
-        const currentX = e.touches[0].clientX;
-        const diff = currentX - startX;
-        currentTranslate = startTranslate + diff;
-        
-        // Calculate boundaries
-        const cardWidth = getCardWidth();
-        const maxTranslate = 0;
-        const minTranslate = -((cards.length - 1) * cardWidth);
-        
-        if (currentTranslate > maxTranslate) {
-            currentTranslate = maxTranslate;
-        } else if (currentTranslate < minTranslate) {
-            currentTranslate = minTranslate;
-        }
-        
-        wrapper.style.transform = `translateX(${currentTranslate}px)`;
-    }
-
-    function dragEnd(e) {
-        if (!isDragging) return;
-        isDragging = false;
-        
-        const currentX = e.changedTouches[0].clientX;
-        const diff = currentX - startX;
-        const cardWidth = getCardWidth();
-        
-        // Determine swipe direction
-        if (Math.abs(diff) > cardWidth * 0.3) {
-            if (diff > 0 && currentIndex > 0) {
-                currentIndex--;
-            } else if (diff < 0 && currentIndex < cards.length - 1) {
-                currentIndex++;
-            }
-        }
-        
-        wrapper.style.transition = 'transform 0.3s ease-out';
-        updateCardPosition(true);
-    }
-
     // Initialize
     updatePadding();
-    
-    // Event Listeners
-    wrapper.addEventListener('touchstart', dragStart, { passive: false });
-    wrapper.addEventListener('touchmove', drag, { passive: false });
-    wrapper.addEventListener('touchend', dragEnd);
-    
+
+    // Add event listeners with passive: false for touchmove
+    wrapper.addEventListener('touchstart', handleTouchStart);
+    wrapper.addEventListener('touchmove', handleTouchMove, { passive: false });
+    wrapper.addEventListener('touchend', handleTouchEnd);
+
+    // Handle resize
     window.addEventListener('resize', () => {
         updatePadding();
         if (window.innerWidth >= 1024) {
             currentIndex = 0;
-            currentTranslate = 0;
-            wrapper.style.transform = 'translateX(0)';
+            updateTransform(0, false);
         } else {
-            updateCardPosition(false);
+            updateTransform(-currentIndex * getCardWidth(), false);
         }
     });
 });
