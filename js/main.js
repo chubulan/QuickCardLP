@@ -549,15 +549,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let isDragging = false;
     let currentIndex = 0;
     
-    const cardWidth = cards[0].offsetWidth + 32;
+    function getCardWidth() {
+        return cards[0].offsetWidth + 32; // Card width + gap
+    }
     
     function updatePadding() {
         if (window.innerWidth < 1024) {
             const containerWidth = wrapper.parentElement.offsetWidth;
             const cardWidth = cards[0].offsetWidth;
             const padding = (containerWidth - cardWidth) / 2;
+            
+            // Only apply left padding to wrapper
             wrapper.style.paddingLeft = `${padding}px`;
-            wrapper.style.paddingRight = `${padding}px`;
+            wrapper.style.paddingRight = '0';
         } else {
             wrapper.style.paddingLeft = '0';
             wrapper.style.paddingRight = '0';
@@ -565,21 +569,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateCardPosition(animate = true) {
-        // Ensure currentIndex stays within bounds
-        currentIndex = Math.max(0, Math.min(currentIndex, cards.length - 1));
+        const cardWidth = getCardWidth();
         currentTranslate = -currentIndex * cardWidth;
+        
         wrapper.style.transition = animate ? 'transform 0.3s ease-out' : 'none';
         wrapper.style.transform = `translateX(${currentTranslate}px)`;
     }
 
-    updatePadding();
-
-    wrapper.addEventListener('touchstart', dragStart);
-    wrapper.addEventListener('touchmove', drag);
-    wrapper.addEventListener('touchend', dragEnd);
-
     function dragStart(e) {
         if (window.innerWidth >= 1024) return;
+        
         isDragging = true;
         startX = e.touches[0].clientX;
         startTranslate = currentTranslate;
@@ -592,23 +591,20 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const currentX = e.touches[0].clientX;
         const diff = currentX - startX;
-        const newTranslate = startTranslate + diff;
+        currentTranslate = startTranslate + diff;
         
-        // Add resistance at the edges
+        // Calculate boundaries
+        const cardWidth = getCardWidth();
         const maxTranslate = 0;
-        const minTranslate = -cardWidth * (cards.length - 1);
+        const minTranslate = -((cards.length - 1) * cardWidth);
         
-        let finalTranslate = newTranslate;
-        
-        // Apply resistance only at the edges
-        if (newTranslate > maxTranslate) {
-            finalTranslate = maxTranslate + (newTranslate - maxTranslate) * 0.2;
-        } else if (newTranslate < minTranslate) {
-            finalTranslate = minTranslate + (newTranslate - minTranslate) * 0.2;
+        if (currentTranslate > maxTranslate) {
+            currentTranslate = maxTranslate;
+        } else if (currentTranslate < minTranslate) {
+            currentTranslate = minTranslate;
         }
         
-        currentTranslate = finalTranslate; // Update currentTranslate
-        wrapper.style.transform = `translateX(${finalTranslate}px)`;
+        wrapper.style.transform = `translateX(${currentTranslate}px)`;
     }
 
     function dragEnd(e) {
@@ -617,27 +613,29 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const currentX = e.changedTouches[0].clientX;
         const diff = currentX - startX;
+        const cardWidth = getCardWidth();
         
-        // Determine direction and update index
-        if (Math.abs(diff) > cardWidth / 3) {
-            if (diff > 0) { // Swiping right
-                currentIndex = Math.max(0, currentIndex - 1);
-            } else if (diff < 0) { // Swiping left
-                currentIndex = Math.min(cards.length - 1, currentIndex + 1);
+        // Determine swipe direction
+        if (Math.abs(diff) > cardWidth * 0.3) {
+            if (diff > 0 && currentIndex > 0) {
+                currentIndex--;
+            } else if (diff < 0 && currentIndex < cards.length - 1) {
+                currentIndex++;
             }
         }
         
-        // Reset transition for smooth animation
         wrapper.style.transition = 'transform 0.3s ease-out';
-        updateCardPosition();
+        updateCardPosition(true);
     }
 
-    // Handle transition end
-    wrapper.addEventListener('transitionend', () => {
-        wrapper.style.transition = 'none';
-    });
-
-    // Reset positions on resize
+    // Initialize
+    updatePadding();
+    
+    // Event Listeners
+    wrapper.addEventListener('touchstart', dragStart, { passive: false });
+    wrapper.addEventListener('touchmove', drag, { passive: false });
+    wrapper.addEventListener('touchend', dragEnd);
+    
     window.addEventListener('resize', () => {
         updatePadding();
         if (window.innerWidth >= 1024) {

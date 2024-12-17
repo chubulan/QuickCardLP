@@ -1566,6 +1566,7 @@ Features
     }
 
 }
+
 /* Security Cards */
 .security-cards-container {
     position: relative;
@@ -1578,6 +1579,7 @@ Features
     transition: transform 0.3s ease;
     width: 100%;
     padding: 0;
+    touch-action: pan-y pinch-zoom; 
 }
 .security-cards {
     display: flex;
