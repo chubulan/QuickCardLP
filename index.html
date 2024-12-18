@@ -2,13 +2,22 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="QuickCard">
+    <meta name="keywords" content="名刺, デジタル名刺, ビジネス, 管理, サービス, 早い">
+    <meta name="description" content="Quick Cardでデジタル名刺を瞬時に作成・管理。あなたのビジネスプロフィールを複数のプラットフォームでシームレスに共有。">
     <meta name="theme-color" content="#2EA665"/>
+    <meta property="og:title" content="Quick Card - 名刺管理サービス">
+    <meta property="og:description" content="Quick Cardでデジタル名刺を瞬時に作成・管理。あなたのビジネスプロフィールを複数のプラットフォームでシームレスに共有。">
+    <meta property="og:image" content="https://yourwebsite.com/path-to-your-image.jpg">
+    <meta property="og:url" content="https://quick-card-lp.vercel.app/">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
     <title>QuickCard 名刺管理サービス</title>
     <link rel="icon" type="image/svg+xml" href="img/illust/logo_black.svg">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.css" defer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
     <script src="js/main.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 <body>
     <!-- Loading -->
@@ -102,9 +111,9 @@
                 <div class="keyvisual fade-up">
                     <!-- Images container -->
                     <div class="images-container">
-                        <img src="img/photos/kv1.jpg" class="masked-image active" alt="Business people">
-                        <img src="img/photos/kv2.jpg" class="masked-image" alt="Business woman">
-                        <img src="img/photos/kv3.jpg" class="masked-image" alt="Business man">
+                        <img src="img/photos/kv1.avif" class="masked-image active" alt="Business people">
+                        <img src="img/photos/kv2.avif" class="masked-image" alt="Business woman">
+                        <img src="img/photos/kv3.avif" class="masked-image" alt="Business man">
                     </div>
                 </div>
             </div>
@@ -140,7 +149,7 @@
                     <div class="problem-card">
                         <h4 class="problem-card-ttl">出張や訪問が多くて、<br>名刺を管理する時間がない</h4>
                         <div class="problem-card-img">
-                            <img src="img/illust/problems1.png" alt="時間がなくて焦っている会社員の手描き風イラスト">
+                            <img src="img/illust/problems1.avif" alt="時間がなくて焦っている会社員の手描き風イラスト">
                         </div>
                         <p class="problem-card-desc">出張や訪問が多くて、クライアント様からいただいた名刺が溜まる一方で、整理する余裕がない...</p>
                     </div>
@@ -148,7 +157,7 @@
                     <div class="problem-card">
                         <h4 class="problem-card-ttl">短時間で大量な名刺をもらって、<br>対応が追いつかない</h4>
                         <div class="problem-card-img">
-                            <img src="img/illust/problems2.PNG" alt="もらった大量の名刺に悩んでいる会社員の手描き風イラスト">
+                            <img src="img/illust/problems2.avif" alt="もらった大量の名刺に悩んでいる会社員の手描き風イラスト">
                         </div>
                         <p class="problem-card-desc">展示会やイベントで一度に多くの名刺を受け取って、誰かいつに出会ったのが忘れちゃう...</p>
                     </div>
@@ -156,7 +165,7 @@
                     <div class="problem-card">
                         <h4 class="problem-card-ttl">情報が共有されてないため、<br>営業効率が低い</h4>
                         <div class="problem-card-img">
-                            <img src="img/illust/problems3.PNG" alt="お互いに不満を抱えている会社員二人の手描き風イラスト">
+                            <img src="img/illust/problems3.avif" alt="お互いに不満を抱えている会社員二人の手描き風イラスト">
                         </div>
                         <p class="problem-card-desc">名刺が個別で管理されていて、営業報告が遅くなって、チームで情報活用できないと感じてる...</p>
                     </div>
@@ -185,15 +194,15 @@
                 </div>
                 <div class="about-pics mb-only">
                     <div class="about-card card-item1">
-                        <img src="img/photos/about1.jpg" alt="スキャンするだけ">
+                        <img src="img/photos/about1.avif" alt="スキャンするだけ">
                         <p class="about-card-text">スキャンするだけ</p>
                     </div>
                     <div class="about-card card-item2">
-                        <img src="img/photos/about2.jpg" alt="スキャンするだけ">
+                        <img src="img/photos/about2.avif" alt="スキャンするだけ">
                         <p class="about-card-text">効率化</p>
                     </div>
                     <div class="about-card card-item3">
-                        <img src="img/photos/about3.jpg" alt="スキャンするだけ">
+                        <img src="img/photos/about3.avif" alt="スキャンするだけ">
                         <p class="about-card-text">スムーズに情報共有</p>
                     </div>
                 </div>
@@ -214,7 +223,7 @@
                         </h2>
                     </div>
                     <div class="about-card card-item1">
-                        <img src="img/photos/about1.jpg" alt="スキャンするだけ">
+                        <img src="img/photos/about1.avif" alt="スキャンするだけ">
                         <p class="about-card-text">スキャンするだけ</p>
                     </div>
 
@@ -222,14 +231,14 @@
                         <img src="img/illust/about2.svg" alt="幾何学パターン">
                     </div>
                     <div class="about-card card-item2">
-                        <img src="img/photos/about2.jpg" alt="スキャンするだけ">
+                        <img src="img/photos/about2.avif" alt="スキャンするだけ">
                         <p class="about-card-text">効率化</p>
                     </div>
                     <div class="about-item">
                         <img src="img/illust/about3.svg" alt="幾何学パターン">
                     </div>
                     <div class="about-card card-item3">
-                        <img src="img/photos/about3.jpg" alt="スキャンするだけ">
+                        <img src="img/photos/about3.avif" alt="スキャンするだけ">
                         <p class="about-card-text">スムーズに情報共有</p>
                     </div>
                     <div class="about-item">
@@ -270,9 +279,9 @@
                                 カメラ撮影で、名刺から氏名、会社名、役職、電話番号、住所などの情報が自動で正確に抽出できます。複数枚を一度でスキャンできるため、大量の名刺も一気に解析・データ化します。
                             </div>
                             <div class="feature-images feature1">
-                                <img src="img/illust/namecard2.png" class="business-cards" alt="名刺イラスト">
-                                <img src="img/illust/namecard1.png" class="business-cards" alt="名刺イラスト">
-                                <img src="img/photos/mockup1.png" class="mockup-sp" alt="QuickCardの名刺一覧画面（スマホ）">
+                                <img src="img/illust/namecard2.avif" class="business-cards" alt="名刺イラスト">
+                                <img src="img/illust/namecard1.avif" class="business-cards" alt="名刺イラスト">
+                                <img src="img/photos/mockup1.avif" class="mockup-sp" alt="QuickCardの名刺一覧画面（スマホ）">
                             </div>
                         </div>
                     </div>
@@ -291,11 +300,11 @@
                                 交換日、会社名、名前順にソートでき、フリーワードや日付によるフィルタリング可能な検索機能で、名刺情報を簡単に見つけられます。
                             </div>
                             <div class="feature-images feature2">
-                                <img src="img/photos/mockup2.png" class="mockup-pc" alt="QuickCardの名刺検索画面（パソコン）">
+                                <img src="img/photos/mockup2.avif" class="mockup-pc" alt="QuickCardの名刺検索画面（パソコン）">
                                 <div class="people-illust-wrapper">
-                                    <img src="img/illust/profilepic1.PNG" class="people-illust" alt="人のイラスト">
-                                    <img src="img/illust/profilepic2.PNG" class="people-illust" alt="人のイラスト">
-                                    <img src="img/illust/profilepic3.PNG" class="people-illust" alt="人のイラスト">
+                                    <img src="img/illust/profilepic1.avif" class="people-illust" alt="人のイラスト">
+                                    <img src="img/illust/profilepic2.avif" class="people-illust" alt="人のイラスト">
+                                    <img src="img/illust/profilepic3.avif" class="people-illust" alt="人のイラスト">
                                 </div>
                             </div>
                         </div>
@@ -316,16 +325,16 @@
                             </div>
                             <div class="feature-images feature3">
                                 <div class="share-photos-wrapper">
-                                    <img src="img/photos/share1.jpg" class="share-photos" alt="会社員たちがパソコンを見ながら話して笑っている">
+                                    <img src="img/photos/share1.avif" class="share-photos" alt="会社員たちがパソコンを見ながら話して笑っている">
                                     <div class="first-photo-illusts">
-                                        <img src="img/illust/fast.PNG" class="share-illust fast-illust" alt="速いイラスト">
-                                        <img src="img/illust/sparkle1.PNG" class="share-illust sparkle-illust" alt="キラキライラスト1">
+                                        <img src="img/illust/fast.avif" class="share-illust fast-illust" alt="速いイラスト">
+                                        <img src="img/illust/sparkle1.avif" class="share-illust sparkle-illust" alt="キラキライラスト1">
                                     </div>
                                 </div>
                                 <div class="share-photos-wrapper">
-                                    <img src="img/photos/share2.jpg" class="share-photos" alt="会社員たちがパソコンを見ながら話して笑っている">
+                                    <img src="img/photos/share2.avif" class="share-photos" alt="会社員たちがパソコンを見ながら話して笑っている">
                                     <div class="second-photo-illusts">
-                                        <img src="img/illust/suprise.PNG" class="share-illust lines-illust" alt="キラキライラスト2">
+                                        <img src="img/illust/suprise.avif" class="share-illust lines-illust" alt="キラキライラスト2">
                                     </div>
                                 </div>
                             </div>
@@ -386,32 +395,32 @@
                         </button>
                             <!-- Function Card -->
                             <div class="function-card">
-                                <img src="img/illust/dataicon.png" alt="データ自動抽出">
+                                <img src="img/illust/dataicon.avif" alt="データ自動抽出">
                                 <h4 class="functions-cards-ttl">データ自動抽出</h4>
                                 <p class="function-cards-desc">高度なOCR技術を活用し、名刺情報を自動で正確に読み取ります。</p>
                             </div>
                             <div class="function-card">
-                                <img src="img/illust/editicon.png" alt="訂正可能な管理">
+                                <img src="img/illust/editicon.avif" alt="訂正可能な管理">
                                 <h4 class="functions-cards-ttl">訂正可能な管理</h4>
                                 <p class="function-cards-desc">誤認識された情報は直感的な画面で簡単に手入力で修正できます。</p>
                             </div>
                             <div class="function-card">
-                                <img src="img/illust/usergroupsicon.png" alt="情報のグループ分け">
+                                <img src="img/illust/usergroupsicon.avif" alt="情報のグループ分け">
                                 <h4 class="functions-cards-ttl">情報のグループ分け</h4>
                                 <p class="function-cards-desc">登録した名刺情報をグループ化でき、必要な名刺を素早く見つけられます。</p>
                             </div>
                             <div class="function-card">
-                                <img src="img/illust/documenticon.png" alt="商談履歴メモ">
+                                <img src="img/illust/documenticon.avif" alt="商談履歴メモ">
                                 <h4 class="functions-cards-ttl">商談履歴メモ</h4>
                                 <p class="function-cards-desc">商談記録によって、案件内容をチームメンバーと簡単に共有できます。</p>
                             </div>
                             <div class="function-card">
-                                <img src="img/illust/calendaricon.png" alt="チームカレンダー">
+                                <img src="img/illust/calendaricon.avif" alt="チームカレンダー">
                                 <h4 class="functions-cards-ttl">チームカレンダー</h4>
                                 <p class="function-cards-desc">チームメンバーの予定を把握し、一目で全体のスケジュールが確認できます。</p>
                             </div>
                             <div class="function-card">
-                                <img src="img/illust/connecticon.png" alt="名刺情報の共有">
+                                <img src="img/illust/connecticon.avif" alt="名刺情報の共有">
                                 <h4 class="functions-cards-ttl">名刺情報の共有</h4>
                                 <p class="function-cards-desc">名刺情報を簡単に共有でき、効率的な情報活用が実現します。</p>
                             </div>
@@ -465,7 +474,7 @@
                         <div class="plan-slider">
                             <div class="plan-slide plan-slide-active">
                                 <img 
-                                    src="img/photos/slider1.jpg" 
+                                    src="img/photos/slider1.avif" 
                                     alt="会社員たちが笑いながらハイタッチしている"
                                     class="plan-image"
                                     loading="lazy"
@@ -473,7 +482,7 @@
                             </div>
                             <div class="plan-slide">
                                 <img 
-                                    src="img/photos/slider2.jpg" 
+                                    src="img/photos/slider2.avif" 
                                     alt="会社員たちが笑いながらパソコンを見ている"
                                     class="plan-image"
                                     loading="lazy"
@@ -481,7 +490,7 @@
                             </div>
                             <div class="plan-slide">
                                 <img 
-                                    src="img/photos/slider3.jpg" 
+                                    src="img/photos/slider3.avif" 
                                     alt="男性会社員がパソコンを見ながら電話をしている"
                                     class="plan-image"
                                     loading="lazy"
@@ -518,7 +527,7 @@
                                 </p>
                             </div>
                             <div class="step-image">
-                                <img src="img/illust/steps1.PNG" alt="スマートフォンを持って歩いている人のイラスト">
+                                <img src="img/illust/steps1.avif" alt="スマートフォンを持って歩いている人のイラスト">
                             </div>
                         </div>
                     </div>
@@ -534,7 +543,7 @@
                                 </p>
                             </div>
                             <div class="step-image">
-                                <img src="img/illust/steps2.PNG" alt="スマートフォンで名刺を撮影している人のイラスト">
+                                <img src="img/illust/steps2.avif" alt="スマートフォンで名刺を撮影している人のイラスト">
                             </div>
                         </div>
                     </div>
@@ -550,7 +559,7 @@
                                 </p>
                             </div>
                             <div class="step-image">
-                                <img src="img/illust/steps3.PNG" alt="二人でスマートフォンを見ながら情報を共有しているイラスト">
+                                <img src="img/illust/steps3.avif" alt="二人でスマートフォンを見ながら情報を共有しているイラスト">
                             </div>
                         </div>
                     </div>

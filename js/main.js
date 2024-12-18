@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function() {
         );
 
         animateSections.forEach(section => {
-            if (isInViewport(section, 100) && !section.classList.contains('in-view')) {
+            if (isInViewport(section, 80) && !section.classList.contains('in-view')) {
                 section.classList.add('in-view');
             }
         });
