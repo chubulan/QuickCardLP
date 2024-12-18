@@ -2508,12 +2508,22 @@ Footer
     fill: var(--color-primary);
     transition: fill 0.3s ease;
 }
-/* Hover states */
-.back-to-top:hover .top-btn circle {
-    fill: var(--color-accent);
+@media (hover: none) {
+    .back-to-top:active .top-btn circle {
+        fill: var(--color-accent);
+    }
+    .back-to-top:active .top-btn path {
+        fill: var(--color-black);
+    }
 }
-.back-to-top:hover .top-btn path {
-    fill: var(--color-black);
+/* Desktop hover styles */
+@media (hover: hover) and (pointer: fine) {
+    .back-to-top:hover .top-btn circle {
+        fill: var(--color-accent);
+    }
+    .back-to-top:hover .top-btn path {
+        fill: var(--color-black);
+    }
 }
 .footer-wrapper {
     display: flex;
