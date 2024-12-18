@@ -2371,7 +2371,7 @@ FAQ
     text-align: left;
     align-items: center;
     gap: 12px;
-    padding-right: 12px;
+    padding-right: 24px;
 }
 .q-icon {
     background-color: var(--color-primary);
@@ -2390,6 +2390,10 @@ FAQ
 /* Arrow Animation */
 .faq-arrow {
     transition: transform 0.3s ease;
+}
+.faq-arrow svg {
+    width: 20px;
+    height: auto;
 }
 /* Answer Styles */
 .faq-answer {
