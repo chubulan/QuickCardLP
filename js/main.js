@@ -538,64 +538,21 @@ function onMenuToggle(isOpen) {
 
 
 // Swipe Cards //
-document.addEventListener('DOMContentLoaded', () => {
-    const wrapper = document.querySelector('.security-cards-wrapper');
-    const cards = document.querySelectorAll('.security-cards');
-    let startX;
-    let currentIndex = 0;
-    
-    // Center the current card on mobile
-    function centerCurrentCard() {
-        if (window.innerWidth >= 1024) {
-            wrapper.style.transform = 'translateX(0)';
-            return;
+// Initialize Swiper
+const swiper = new Swiper('.swiper', {
+    slidesPerView: 'auto',
+    spaceBetween: 16,
+    centeredSlides: true,
+    breakpoints: {
+        1024: {
+            enabled: false,
+            slidesPerView: 2,
+            width: 360, 
+            slidesPerView: 'auto', // Let CSS control the width
+            centeredSlides: false,
+            spaceBetween: 72
         }
-        
-        const cardWidth = cards[0].offsetWidth + 32;
-        wrapper.style.transition = 'transform 0.3s ease';
-        wrapper.style.transform = `translateX(${-currentIndex * cardWidth}px)`;
     }
-    
-    // Touch start
-    wrapper.addEventListener('touchstart', (e) => {
-        if (window.innerWidth >= 1024) return;
-        startX = e.touches[0].clientX;
-        wrapper.style.transition = 'none';
-    });
-    
-    // Touch move
-    wrapper.addEventListener('touchmove', (e) => {
-        if (!startX) return;
-        
-        const currentX = e.touches[0].clientX;
-        const walk = currentX - startX;
-        const cardWidth = cards[0].offsetWidth + 32;
-        
-        wrapper.style.transform = `translateX(${-currentIndex * cardWidth + walk}px)`;
-    });
-    
-    // Touch end
-    wrapper.addEventListener('touchend', (e) => {
-        if (!startX) return;
-        
-        const endX = e.changedTouches[0].clientX;
-        const diff = endX - startX;
-        
-        // If swiped far enough, change card
-        if (Math.abs(diff) > 50) {
-            if (diff > 0 && currentIndex > 0) {
-                currentIndex--;
-            } else if (diff < 0 && currentIndex < cards.length - 1) {
-                currentIndex++;
-            }
-        }
-        
-        centerCurrentCard();
-        startX = null;
-    });
-    
-    // Handle window resize
-    window.addEventListener('resize', centerCurrentCard);
 });
 
 

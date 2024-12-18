@@ -6,7 +6,9 @@
     <title>QuickCard 名刺管理サービス</title>
     <link rel="icon" type="image/svg+xml" href="img/illust/logo_black.svg">
     <link rel="stylesheet" href="css/main.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" /> -->
     <script src="js/main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 <body>
     <!-- Loading -->
@@ -341,16 +343,22 @@
                                 重要な名刺情報を保護するため、データの暗号化、安全な保存を徹底します。カメラやストレージ、連絡先などへのアクセス権限を適切に管理し、ユーザーのプライバシーを守ります。
                             </div>
                             <div class="security-cards-container">
-                                <div class="security-cards-wrapper">
-                                    <div class="security-cards">
-                                        <div class="security-cards-ttl">データ暗号化</div>
-                                        <img src="img/illust/security1.svg" class="f-icon" alt="データ暗号化のイラスト">
-                                        <div class="f-cards-desc">個人情報を安全に保護する</div>
-                                    </div>
-                                    <div class="security-cards">
-                                        <div class="security-cards-ttl">アクセス権限管理</div>
-                                        <img src="img/illust/security2.svg" class="f-icon" alt="アクセス権限管理">
-                                        <div class="f-cards-desc">ユーザーのプライバシーを守る</div>
+                                <div class="swiper">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <div class="security-cards">
+                                                <div class="security-cards-ttl">データ暗号化</div>
+                                                <img src="img/illust/security1.svg" class="f-icon" alt="データ暗号化のイラスト">
+                                                <div class="f-cards-desc">個人情報を安全に保護する</div>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="security-cards">
+                                                <div class="security-cards-ttl">アクセス権限管理</div>
+                                                <img src="img/illust/security2.svg" class="f-icon" alt="アクセス権限管理">
+                                                <div class="f-cards-desc">ユーザーのプライバシーを守る</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -1609,27 +1609,30 @@ Features
     position: relative;
     width: 100%;
     overflow-x: hidden;
-    padding: 20px 0;
     -webkit-overflow-scrolling: touch;
-    padding: 16px; /* or any desired spacing */
+    padding: 20px 16px;
 }
-.security-cards-wrapper {
-    display: flex;
-    transition: transform 0.3s ease;
+.swiper {
     width: 100%;
-    padding: 0;
-    touch-action: pan-y pinch-zoom;
-    -webkit-overflow-scrolling: touch; /* For iOS momentum scrolling */
-    -webkit-user-select: none; /* Prevent text selection while dragging */
-    user-select: none;
+    padding: 20px 0;
+}
+.swiper-wrapper {
+    padding: 4px 0;
+    display: flex;
+    flex-direction: row;
+}
+.swiper-slide {
+    width: 320px;
 }
 .security-cards {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 270px;
+    min-width: 280px;
+    width: 90%;
+    max-width: 320px;
     flex-shrink: 0;
-    padding: 28px;
+    padding: 28px 20px;
     gap: 36px;
     border-radius: 12px;
     border: 1px solid var(--color-grey);
@@ -1650,23 +1653,29 @@ Features
 .security-cards + .security-cards {
     margin-left: 16px; /* Override the 32px margin */
 }
-.security-cards-wrapper {
-    padding: 0 0 20px; /* Add padding for shadow visibility */
-}
+
 @media (min-width: 1024px) {
-    .security-cards-wrapper {
+    .security-cards-container {
+        margin-left: 32px;
+    }
+    .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 400px;
+    }
+    .swiper-wrapper {
+        display: flex;
         transform: none !important;
         margin: 0 auto;
-        width: 80%;
-        gap: clamp(36px, 5vw, 60px);
+        justify-content: center;
+        align-items: center;
     }
     .security-cards {
-        margin: 0;
-        width: calc(50% - 30px); /* Set a fixed width */
-        max-width: 320px; /* Add a max-width */
-        min-height: 300px; /* Set a fixed height */
-        /* Remove min-width since we're setting a percentage width */
-        min-width: unset;
+        margin: 0 auto;
+        width: 100%; /* Takes full width of the slide */
+        flex-shrink: 0;
+        padding: 28px 20px;
     }
     .security-cards-container {
         overflow-x: visible;
