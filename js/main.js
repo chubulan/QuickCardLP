@@ -341,8 +341,6 @@ document.addEventListener('DOMContentLoaded', startAnimation);
 
 
 
-
-
 // Header adds white fill //
 const header = document.querySelector('.header');
 
@@ -376,6 +374,7 @@ window.addEventListener('resize', handleScroll);
 
 // Run once on page load to set initial state
 handleScroll();
+
 
 
 
@@ -538,7 +537,6 @@ function onMenuToggle(isOpen) {
 
 
 // Swipe Cards //
-// Initialize Swiper
 const swiper = new Swiper('.swiper', {
     slidesPerView: 'auto',
     spaceBetween: 16,
@@ -565,57 +563,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
     let isMobile = window.innerWidth < 1024;
 
-    function showCard(index) {
-        if (!isMobile) return;
-
-        if (index < 0) {
-            index = cards.length - 1;
-        } else if (index >= cards.length) {
-            index = 0;
-        }
-
-        currentIndex = index;
-
-        cards.forEach((card, i) => {
-            card.classList.toggle('active', i === currentIndex);
-            card.style.display = ''; // Remove inline styles
-        });
-    }
-
-    // Initialize
-    function init() {
-        isMobile = window.innerWidth < 1024;
-        if (isMobile) {
-            showCard(currentIndex);
-        } else {
-            cards.forEach(card => {
-                card.classList.remove('active');
-                card.style.display = ''; // Remove inline styles
-            });
-        }
-    }
-
-    // Initialize on load
-    init();
-
-    // Navigation
-    prevBtn.addEventListener('click', () => showCard(currentIndex - 1));
-    nextBtn.addEventListener('click', () => showCard(currentIndex + 1));
-
-    // Debounced resize handler
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(init, 100);
-    });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const cards = document.querySelectorAll('.function-card');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    let currentIndex = 0;
-    let isMobile = window.innerWidth < 1024;
+    // Touch handling variables
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const minSwipeDistance = 50; // Minimum distance for a swipe to register
 
     function showCard(index) {
         if (!isMobile) return;
@@ -647,10 +598,45 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Swipe handlers
+    function handleTouchStart(event) {
+        touchStartX = event.touches[0].clientX;
+    }
+
+    function handleTouchMove(event) {
+        // Prevent default scrolling when swiping
+        event.preventDefault();
+    }
+
+    function handleTouchEnd(event) {
+        touchEndX = event.changedTouches[0].clientX;
+        handleSwipe();
+    }
+
+    function handleSwipe() {
+        const swipeDistance = touchEndX - touchStartX;
+
+        if (Math.abs(swipeDistance) > minSwipeDistance) {
+            if (swipeDistance > 0) {
+                // Swiped right - show previous card
+                showCard(currentIndex - 1);
+            } else {
+                // Swiped left - show next card
+                showCard(currentIndex + 1);
+            }
+        }
+    }
+
     // Initialize on load
     init();
 
-    // Navigation
+    // Add touch event listeners to the container
+    const cardsContainer = cards[0].parentElement;
+    cardsContainer.addEventListener('touchstart', handleTouchStart, false);
+    cardsContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
+    cardsContainer.addEventListener('touchend', handleTouchEnd, false);
+
+    // Navigation buttons
     prevBtn.addEventListener('click', () => showCard(currentIndex - 1));
     nextBtn.addEventListener('click', () => showCard(currentIndex + 1));
 

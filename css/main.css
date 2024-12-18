@@ -173,11 +173,20 @@ a {
     }
 }
 .btn-nav {
-    padding: 6px 24px; 
+    font-size: 14px;
     border-radius: 24px;
-    font-size: 16px;
-    border: 2px solid var(--color-primary);
+    border: 1px solid var(--color-primary);
+    padding: 8px 16px;
 }
+@media (min-width: 1024px) {
+    .btn-nav {
+        padding: 6px 24px; 
+        border-radius: 24px;
+        font-size: 16px;
+        border: 2px solid var(--color-primary);
+    }
+}
+
 .btn-cta .btn-arrow path {
     stroke: var(--color-white);
     transition: transform 0.3s ease, stroke 0.3s ease;
@@ -409,17 +418,17 @@ header {
     width: 100vw;
     z-index: 1000;
     transition: background-color 0.3s ease;
-    display: flex;           /* Add this */
-    justify-content: center; /* Add this */
+    display: flex;           
+    justify-content: center; 
 }
 .header--scrolled {
     background-color: var(--color-white);
     max-width: 430px;
-    width: 100%;            /* Add this */
-    left: 50%;             /* Add this */
-    transform: translateX(-50%); /* Add this */
-    position: fixed;       /* Add this */
-    /* box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.1); */
+    width: 100%;          
+    left: 50%;             
+    transform: translateX(-50%); 
+    position: fixed;  
+    box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.1);
 }
 header .container {
     padding: 12px 16px;
@@ -431,7 +440,7 @@ header .container {
 }
 /* Logo */
 .logo {
-    width: 32px;
+    width: 40px;
     height: auto;
     position: relative; /* Add position relative for z-index context */
     z-index: 1002; /* Ensure logo stays above menu */
@@ -454,10 +463,25 @@ header .container {
     display: block;
 }
 
+
+/* Mobile menu right side */
+.mobile-nav-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+}
+@media (min-width: 1024px) {
+    .mobile-nav-right.mb-only {
+        display: none;
+    }
+}
+
+
 /* Hamburger Menu - Mobile/Tablet Only */
 .hamburger-menu {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     background: var(--color-grey);
     border-radius: 50%;
     display: flex;
@@ -473,7 +497,7 @@ header .container {
     display: flex;
 }
 .hamburger-menu span {
-    width: 14px;
+    width: 16px;
     height: 2px;
     background: var(--color-white);
     transition: all 0.3s ease-in-out;
@@ -671,7 +695,7 @@ First View
     gap: 16px;
 }
 .hero-content h1 {
-    font-size: 30px;
+    font-size: 32px;
 }
 .hero-content-desc {
     font-size: 16px;
@@ -1614,7 +1638,6 @@ Features
 }
 .swiper {
     width: 100%;
-    padding: 20px 0;
 }
 .swiper-wrapper {
     padding: 4px 0;
@@ -1643,12 +1666,6 @@ Features
 .security-cards-ttl {
     font-weight: 600;
     font-size: 18px;
-}
-.security-cards {
-    margin: 0 16px; /* Add consistent margins for mobile */
-}
-.security-cards:first-child {
-    margin-left: 16px; /* Override the auto margin */
 }
 .security-cards + .security-cards {
     margin-left: 16px; /* Override the 32px margin */
@@ -1694,6 +1711,7 @@ Features
     width: 100%;
     padding: 0 48px;
     min-height: 320px; 
+    touch-action: pan-y pinch-zoom;
 }
 .function-card img {
     height: 60px; /* Adjust based on your needs */
@@ -2140,6 +2158,7 @@ Download
     max-width: 430px;
     margin: 0 auto;
 }
+
 .btn-cta-big {
     display: flex;
     position: relative;
@@ -2147,29 +2166,32 @@ Download
     background: var(--color-primary);
     border-radius: 16px;
     padding: 40px;
-    display: flex;
     flex-direction: column;
     align-items: center;
     color: var(--color-white);
     transition: all 0.3s ease;
 }
-/* Your existing button styles */
+
 .btn-cta-content {
     flex: 1;
     margin-bottom: 32px;
 }
+
 .btn-cta-content-ttl {
     font-size: 24px;
     margin-bottom: 16px;
     font-weight: 600;
 }
+
 .btn-cta-desc {
     font-size: 16px;
 }
+
 .btn-cta-illust {
     position: relative;
     max-width: 320px;
 }
+
 .btn-cta-arrow {
     position: absolute;
     max-width: 100px;
@@ -2177,7 +2199,8 @@ Download
     bottom: -2%;
     transform: translateY(-50%);
 }
-/* Hover states */
+
+/* Base states for hover elements */
 .hover-btn-illust,
 .hover-btn-arrow {
     opacity: 0;
@@ -2186,49 +2209,66 @@ Download
     left: 0;
     transition: opacity 0.3s ease;
 }
-.btn-cta-big:hover .hover-btn-illust,
-.btn-cta-big:hover .hover-btn-arrow {
-    opacity: 1;
+
+/* Desktop-only hover effects */
+@media (hover: hover) and (pointer: fine) {
+    .btn-cta-big:hover {
+        background: var(--color-black);
+    }
+
+    .btn-cta-big:hover .hover-btn-illust,
+    .btn-cta-big:hover .hover-btn-arrow {
+        opacity: 1;
+    }
 }
-.btn-cta-big:hover {
-    background: var(--color-black);
+
+/* Touch device styles - no hover effects */
+@media (hover: none) {
+    .btn-cta-big:active {
+        background: var(--color-black);
+    }
 }
+
+/* Tablet/Desktop layout */
 @media (min-width: 1024px) {
     #download .container {
         padding: 0;
         max-width: min(95%, 1440px);
         margin: 0 auto;
     }
+
     .btn-cta-big {
-        display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
         padding: clamp(40px, 5vw, 80px);
-        position: relative;
         gap: 24px;
         border-radius: 32px;
     }
+
     .btn-cta-content {
         flex: 0.9;
-        min-width: 0; /* Prevents flex item from overflowing */
-        max-width: 55%; /* Ensures content stays dominant */
+        min-width: 0;
+        max-width: 55%;
     }
+
     .btn-cta-content-ttl {
         font-size: clamp(24px, 4vw, 40px);
         margin-bottom: clamp(20px, 3vw, 32px);
         line-height: 1.5;
     }
+
     .btn-cta-desc {
         font-size: clamp(16px, 2vw, 24px);
     }
+
     .btn-cta-illust {
         flex: 0 0 auto;
-        width: min(50%, 640px); 
-        min-width: 480px; 
+        width: min(50%, 640px);
+        min-width: 480px;
     }
+
     .btn-cta-arrow {
-        position: absolute;
         width: min(12%, 240px);
         min-width: 140px;
         bottom: 2%;
@@ -2237,18 +2277,21 @@ Download
     }
 }
 
-/* Add a larger screen breakpoint for better scaling */
+/* Large screen optimizations */
 @media (min-width: 1440px) {
     .btn-cta-big {
         padding: 80px;
     }
+
     .btn-cta-illust {
         min-width: 600px;
     }
+
     .btn-cta-content {
         flex: 1;
         max-width: 60%;
     }
+
     .btn-cta-arrow {
         bottom: 0;
         min-width: 180px;
@@ -2454,7 +2497,7 @@ Footer
 
 }
 .footer-nav {
-    padding: 0 12px;
+    padding: 0 6px;
 }
 .footer-links li{
     padding: 24px 0;
