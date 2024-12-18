@@ -306,9 +306,9 @@ a {
 /* Fade up Animation */
 #problems,
 .about-grid,
-#features .feature-box,
 #steps .step-item,
-.function-card {
+.function-card,
+.feature-box {  /* Add feature-box here */
     opacity: 0;
     transform: translateY(50px);
     transition: all 0.6s ease-out;
@@ -316,44 +316,22 @@ a {
 /* Animation when element comes into view */
 #problems.in-view,
 .about-grid.in-view,
-#features .feature-box.in-view,
 #steps .step-item.in-view,
-.function-card.in-view {
+.function-card.in-view,
+.feature-box.in-view {
     opacity: 1;
     transform: translateY(0);
 }
-/* Main container animation */
-#features .feature-box {
+/* Features Animation */
+.feature-number, .feature-title span, .feature-title h3, .feature-desc {
     opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.6s ease-out;
+    transform: translateX(-30px); 
+    transition: all 0.5s ease-out;
 }
-/* Nested elements initial state */
-.feature-images img {
+.feature-box, .business-cards, .mockup-sp, .mockup-pc, .people-illust, .share-photos, .share-illust, .security-cards-container {
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.5s ease-out;
-}
-.security-cards-container {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.5s ease-out;
-}
-/* Animation when container comes into view */
-#features .feature-box.in-view {
-    opacity: 1;
-    transform: translateY(0);
-}
-/* Animation for nested elements when parent is in view */
-#features .feature-box.in-view .feature-images img {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.5s;
-}
-#features .feature-box.in-view .security-cards-container {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.5s;
 }
 
 
@@ -771,11 +749,10 @@ First View
 /* Key Visuals */
 .keyvisual {
     position: relative;
-    width: clamp(329px, 100%, 600px);  /* Min 200px, preferred 100%, max 550px */
-    aspect-ratio: 329/347;  /* Maintains SVG's original proportions */
+    width: clamp(329px, 100%, 600px); 
+    aspect-ratio: 329/347; 
     margin: 0 auto;
 }
-
 .mask-svg {
     position: absolute;
     width: 100%;
@@ -1056,7 +1033,7 @@ Problems
     width: 100%;
     max-width: 280px;
     display: flex;
-    justify-content: center;
+    justify-content: center; 
 }
 .problem-card-desc {
     line-height: 1.5;
@@ -1091,6 +1068,15 @@ Problems
     }
     .problem-card-img  {
         max-width: 320px;
+    }
+    .problem-card-img img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.3s ease; 
+    }
+    /* Zoom effect on hover */
+    .problem-card-img:hover img {
+        transform: scale(1.1); /* Increases size by 10% */
     }
     .pb-bg-decors {
         position: absolute;

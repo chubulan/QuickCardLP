@@ -234,6 +234,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
+
+
 // Scroll Animation //
 document.addEventListener('DOMContentLoaded', function() {
     // Utility function to check if element is in viewport
@@ -245,27 +248,108 @@ document.addEventListener('DOMContentLoaded', function() {
         );
     }
 
-    // Function to handle scroll animations
-    function handleScrollAnimations() {
-        // Select all sections that should animate
+    // Function to animate elements
+    function animateElement(element, delay = 0) {
+        setTimeout(() => {
+            element.style.opacity = '1';
+            // Check if element has translateX or translateY initially
+            const currentTransform = window.getComputedStyle(element).transform;
+            if (currentTransform.includes('translateX')) {
+                element.style.transform = 'translateX(0)';
+            } else {
+                element.style.transform = 'translateY(0)';
+            }
+        }, delay);
+    }
+
+    // Combined function to handle all scroll animations
+    function handleAllScrollAnimations() {
+        // Handle general section animations
         const animateSections = document.querySelectorAll(
-            '#problems, .about-grid, #features .feature-box, #steps .step-item, .function-card'
+            '#problems, .about-grid, .feature-box, #steps .step-item, .function-card'
         );
 
         animateSections.forEach(section => {
-            if (isInViewport(section, 80) && !section.classList.contains('in-view')) {
+            if (isInViewport(section, 100) && !section.classList.contains('in-view')) {
                 section.classList.add('in-view');
             }
+        });
+
+        // Handle feature box animations
+        const featureBoxes = document.querySelectorAll('.feature-box.in-view:not(.animated)');
+        
+        featureBoxes.forEach(box => {
+            box.classList.add('animated');
+
+                // Animate feature box elements in sequence
+                const number = box.querySelector('.feature-number');
+                const titleEn = box.querySelector('.feature-title span');
+                const titleJp = box.querySelector('.feature-title h3');
+                const desc = box.querySelector('.feature-desc');
+
+                // Sequence of animations
+                animateElement(number, 100);
+                animateElement(titleEn, 300);
+                animateElement(titleJp, 500);
+                animateElement(desc, 700);
+
+                // Feature 1: Business cards and mockup
+                const businessCards = box.querySelectorAll('.business-cards');
+                const mockupSp = box.querySelector('.mockup-sp');
+                
+                businessCards.forEach((card, index) => {
+                    animateElement(card, 300 * (index + 1));
+                });
+                if (mockupSp) {
+                    animateElement(mockupSp, 900);
+                }
+
+                // Feature 2: PC mockup and profile illustrations
+                const mockupPc = box.querySelector('.mockup-pc');
+                const profileIllusts = box.querySelectorAll('.people-illust');
+                
+                if (mockupPc) {
+                    animateElement(mockupPc, 300);
+                }
+                profileIllusts.forEach((illust, index) => {
+                    animateElement(illust, 600 + (200 * index));
+                });
+
+                // Feature 3: Share photos
+                const sharePhotos = box.querySelectorAll('.share-photos');
+                const shareIllusts = box.querySelectorAll('.share-illust');
+
+                sharePhotos.forEach((photo, index) => {
+                    animateElement(photo, 300 * (index + 1));
+                });
+
+                shareIllusts.forEach((illust, index) => {
+                    animateElement(illust, 900 + (300 * index));
+                });
+
+                // Feature 4: Security Cards
+                const securityCards = box.querySelector('.security-cards-container');
+                if (securityCards) {
+                    animateElement(securityCards, 300);
+                }
         });
     }
 
     // Initial check
-    handleScrollAnimations();
+    handleAllScrollAnimations();
 
-    // Add scroll event listener
-    window.addEventListener('scroll', handleScrollAnimations);
+    // Add single scroll event listener
+    // Optional: Add debounce for better performance
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (scrollTimeout) {
+            window.cancelAnimationFrame(scrollTimeout);
+        }
+        scrollTimeout = window.requestAnimationFrame(() => {
+            handleAllScrollAnimations();
+        });
+    });
 });
-
 
 
 // Dot color transition //
@@ -479,9 +563,6 @@ function resetDots() {
     });
     isAnimating = false;
 }
-
-
-
 
 
 // Logo's color switching //
