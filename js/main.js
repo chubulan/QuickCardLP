@@ -483,6 +483,7 @@ function resetDots() {
 
 
 
+
 // Logo's color switching //
 const logo = document.querySelector('.logo');
 const aboutSection = document.querySelector('#about');

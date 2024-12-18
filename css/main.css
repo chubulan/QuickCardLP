@@ -145,20 +145,21 @@ a {
 }
 
 /* 6. Common Components */
-/* Buttons */
+/* Base Button Styles */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-weight: 500;
     gap: 20px;
-    
 }
+
 .btn-primary {
     background: var(--color-primary);
     color: var(--color-white);
     transition: all 0.3s ease;
 }
+
 .btn-cta {
     width: 100%; 
     padding: 14px 32px;
@@ -166,51 +167,84 @@ a {
     border-radius: 48px;
     border: 3px solid var(--color-primary);
 }
-@media (min-width: 1024px) {
-    .btn-cta {
-        font-size: 20px;
-        width: fit-content; 
-    }
-}
+
 .btn-nav {
     font-size: 14px;
     border-radius: 24px;
     border: 1px solid var(--color-primary);
     padding: 8px 16px;
 }
+
+/* Base arrow styles */
+.btn-cta .btn-arrow path {
+    stroke: var(--color-white);
+    transition: transform 0.3s ease, stroke 0.3s ease;
+}
+
+.btn-arrow {
+    transition: transform 0.3s ease;
+}
+
+/* Touch device styles */
+@media (hover: none) {
+    /* Active states for touch devices */
+    .btn-cta:active {
+        background: var(--color-white);
+        color: var(--color-accent);
+        border-color: var(--color-accent);
+    }
+
+    .btn-nav:active {
+        background: var(--color-white);
+        color: var(--color-accent);
+        border-color: var(--color-accent);
+    }
+
+    .btn-cta:active .btn-arrow path {
+        stroke: var(--color-accent);
+    }
+
+    .btn-cta:active .btn-arrow {
+        transform: translateX(5px);
+    }
+}
+
+/* Desktop hover styles */
+@media (hover: hover) and (pointer: fine) {
+    .btn-cta:hover {
+        background: var(--color-white);
+        color: var(--color-accent);
+        border-color: var(--color-accent);
+    }
+
+    .btn-nav:hover {
+        background: var(--color-white);
+        color: var(--color-accent);
+        border-color: var(--color-accent);
+    }
+
+    .btn-cta:hover .btn-arrow path {
+        stroke: var(--color-accent);
+    }
+
+    .btn-cta:hover .btn-arrow {
+        transform: translateX(5px);
+    }
+}
+
+/* Responsive styles */
 @media (min-width: 1024px) {
+    .btn-cta {
+        font-size: 20px;
+        width: fit-content; 
+    }
+
     .btn-nav {
         padding: 6px 24px; 
         border-radius: 24px;
         font-size: 16px;
         border: 2px solid var(--color-primary);
     }
-}
-
-.btn-cta .btn-arrow path {
-    stroke: var(--color-white);
-    transition: transform 0.3s ease, stroke 0.3s ease;
-}
-.btn-cta:hover {
-    background: var(--color-white);
-    stroke: var(--color-white);
-    color: var(--color-accent);
-    border: 3px solid var(--color-accent);
-}
-.btn-nav:hover {
-    background: var(--color-white);
-    stroke: var(--color-white);
-    color: var(--color-accent);
-    border: 2px solid var(--color-accent);
-}
-.btn-cta:hover .btn-arrow path {
-    stroke: var(--color-accent);
-}
-.btn-arrow {
-    transition: transform 0.3s ease;
-}
-.btn-cta:hover .btn-arrow {
-    transform: translateX(5px);
 }
 /* Section Title */
 .section-header {
@@ -422,13 +456,15 @@ header {
     justify-content: center; 
 }
 .header--scrolled {
-    background-color: var(--color-white);
+    background-color: rgb(255 255 255 / 80%);
     max-width: 430px;
     width: 100%;          
     left: 50%;             
     transform: translateX(-50%); 
     position: fixed;  
     box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); /* For Safari support */
 }
 header .container {
     padding: 12px 16px;
@@ -480,8 +516,8 @@ header .container {
 
 /* Hamburger Menu - Mobile/Tablet Only */
 .hamburger-menu {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     background: var(--color-grey);
     border-radius: 50%;
     display: flex;
@@ -2455,8 +2491,8 @@ Footer
 }
 .top-btn {
     display: block;
-    width: 72px;
-    height: 72px;
+    width: 60px;
+    height: 60px;
     filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1)); 
 }
 /* Default states */
