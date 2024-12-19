@@ -264,28 +264,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Combined function to handle all scroll animations
     function handleAllScrollAnimations() {
-        // Handle general section animations
+        // Handle general section animations with consistent tolerance
         const animateSections = document.querySelectorAll(
             '#problems, .about-grid, .about-pics.mb-only, .feature-box, #steps .step-item, .function-card'
         );
-
+    
+        const tolerance = 200; // Standardize tolerance
+    
         animateSections.forEach(section => {
-            if (isInViewport(section, 100) && !section.classList.contains('in-view')) {
+            if (isInViewport(section, tolerance) && !section.classList.contains('in-view')) {
                 section.classList.add('in-view');
             }
         });
-
+    
         // Handle about cards animations
         const aboutPicsMobile = document.querySelector('.about-pics.mb-only');
-        if (aboutPicsMobile && isInViewport(aboutPicsMobile, 300) && !aboutPicsMobile.classList.contains('animated')) {
+        if (aboutPicsMobile && isInViewport(aboutPicsMobile, tolerance) && !aboutPicsMobile.classList.contains('animated')) {
             aboutPicsMobile.classList.add('animated');
             
-            // Animate each card with delay
-            const cards = aboutPicsMobile.querySelectorAll('.about-card-mb');
+            const cards = aboutPicsMobile.querySelectorAll('.about-card-mb'); 
             cards.forEach((card, index) => {
-                setTimeout(() => {
+                const timeoutId = setTimeout(() => {
                     card.classList.add('in-view');
                 }, 200 * (index + 1));
+                
+                // Store timeout ID for cleanup if needed
+                card.dataset.timeoutId = timeoutId;
             });
         }
 
