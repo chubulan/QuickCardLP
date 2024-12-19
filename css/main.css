@@ -11,6 +11,7 @@ Starting
     padding: 0;
     box-sizing: border-box;
 }
+
 ul, ol {
     list-style: none;
 }
@@ -1367,7 +1368,6 @@ Features
         max-width: 1200px;
         margin: 120px 0 80px auto;
         position: relative; /* Add this */
-        overflow: visible;
     }
     .feature-header {
         padding-left: clamp(24px, 4vw, 48px);
@@ -1741,6 +1741,8 @@ Features
 @media (min-width: 1024px) {
     .security-cards-container {
         margin-left: 32px;
+        width: calc(100% - 32px);
+        position: relative;
     }
     .swiper-slide {
         display: flex;
@@ -1751,14 +1753,28 @@ Features
     .swiper-wrapper {
         display: flex;
         transform: none !important;
-        margin: 0 auto;
         justify-content: center;
         align-items: center;
+        gap: 20px;
+        width: 100%; 
+    }
+    .swiper {
+        width: 100%;
+        max-width: 820px; /* Reduced max-width */
+        margin: 0 auto;
+    }
+    .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 380px; /* Slightly reduced width */
+        flex: 0 0 auto; /* Prevent slides from growing/shrinking */
     }
     .security-cards {
         margin: 0 auto;
-        width: 100%; /* Takes full width of the slide */
+        width: 100%;
         flex-shrink: 0;
+        box-sizing: border-box;
         padding: 28px 20px;
     }
     .security-cards-container {
