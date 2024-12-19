@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleAllScrollAnimations() {
         // Handle general section animations
         const animateSections = document.querySelectorAll(
-            '#problems, .about-grid, .feature-box, #steps .step-item, .function-card'
+            '#problems, .about-grid, .about-pics.mb-only, .feature-box, #steps .step-item, .function-card'
         );
 
         animateSections.forEach(section => {
@@ -274,6 +274,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 section.classList.add('in-view');
             }
         });
+
+        // Handle about cards animations
+        const aboutPicsMobile = document.querySelector('.about-pics.mb-only');
+        if (aboutPicsMobile && isInViewport(aboutPicsMobile, 300) && !aboutPicsMobile.classList.contains('animated')) {
+            aboutPicsMobile.classList.add('animated');
+            
+            // Animate each card with delay
+            const cards = aboutPicsMobile.querySelectorAll('.about-card-mb');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('in-view');
+                }, 200 * (index + 1));
+            });
+        }
 
         // Handle feature box animations
         const featureBoxes = document.querySelectorAll('.feature-box.in-view:not(.animated)');
@@ -289,9 +303,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Sequence of animations
                 animateElement(number, 100);
-                animateElement(titleEn, 300);
-                animateElement(titleJp, 500);
-                animateElement(desc, 700);
+                animateElement(titleEn, 100);
+                animateElement(titleJp, 200);
+                animateElement(desc, 400);
 
                 // Feature 1: Business cards and mockup
                 const businessCards = box.querySelectorAll('.business-cards');

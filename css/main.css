@@ -306,6 +306,7 @@ a {
 /* Fade up Animation */
 #problems,
 .about-grid,
+.about-pics.mb-only,
 #steps .step-item,
 .function-card,
 .feature-box {  /* Add feature-box here */
@@ -316,9 +317,20 @@ a {
 /* Animation when element comes into view */
 #problems.in-view,
 .about-grid.in-view,
+.about-pics.mb-only.in-view,
 #steps .step-item.in-view,
 .function-card.in-view,
 .feature-box.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* About pics (mb-only) */
+.about-card-mb {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s ease-out;
+}
+.about-card-mb.in-view {
     opacity: 1;
     transform: translateY(0);
 }
@@ -1031,7 +1043,7 @@ Problems
 .problem-card-img {
     text-align: center;
     width: 100%;
-    max-width: 280px;
+    max-width: 300px;
     display: flex;
     justify-content: center; 
 }
@@ -1137,6 +1149,8 @@ About
     margin: 24px 0 36px;
     text-align-last: center;
     padding-left: 1rem;
+    font-weight: 600;
+    line-height: 1.8;
 }
 .about-title .en-poppins {
     padding: 0 4px;

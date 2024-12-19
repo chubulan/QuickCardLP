@@ -15,7 +15,7 @@
     <meta name="robots" content="index, follow">
     <title>QuickCard 名刺管理サービス</title>
     <link rel="icon" type="image/svg+xml" href="img/illust/logo_black.svg">
-    <link rel="stylesheet" href="css/main.css" defer>
+    <link rel="stylesheet" href="css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
     <script src="js/main.js" defer></script>
 </head>
@@ -54,7 +54,7 @@
            </div>
       
           <!-- Desktop Navigation -->
-          <nav class="header-nav pc-only" role="navigation" aria-label="ナビゲーショnメニュー">
+          <nav class="header-nav pc-only" aria-label="ナビゲーショnメニュー">
             <ul class="pc-nav-links">
               <li><a href="#about"><span class="en-poppins">QuickCard</span>とは</a></li>
               <li><a href="#features">特徴・機能</a></li>
@@ -67,7 +67,7 @@
       
           <!-- Mobile/Tablet Menu -->
           <div class="mobile-menu mb-only">
-            <nav role="navigation" aria-label="ナビゲーションメニュー">
+            <nav aria-label="ナビゲーションメニュー">
               <ul class="mobile-nav-links">
                 <li><a href="#about"><span class="en-poppins">QuickCard</span>とは</a></li>
                 <li><a href="#features">特徴・機能</a></li>
@@ -184,24 +184,24 @@
             <div class="container">
                 <!-- Mobile/Tablet -->
                 <div class="about-title mb-only">
-                    <h2 class="about-title">
+                    <div class="about-title">
                         <div class="about-title1"><span class="en-poppins">QuickCard</span>とは</div>
                         <div class="about-title2">名刺管理の面倒をゼロに。<br>
                             新しい可能性は、<br>
                             全部<span class="en-poppins">QuickCard</span>で繋がる
                         </div>
-                    </h2>
+                    </div>
                 </div>
                 <div class="about-pics mb-only">
-                    <div class="about-card card-item1">
+                    <div class="about-card card-item1 about-card-mb">
                         <img src="img/photos/about1.avif" alt="スキャンするだけ">
                         <p class="about-card-text">スキャンするだけ</p>
                     </div>
-                    <div class="about-card card-item2">
+                    <div class="about-card card-item2 about-card-mb">
                         <img src="img/photos/about2.avif" alt="スキャンするだけ">
                         <p class="about-card-text">効率化</p>
                     </div>
-                    <div class="about-card card-item3">
+                    <div class="about-card card-item3 about-card-mb">
                         <img src="img/photos/about3.avif" alt="スキャンするだけ">
                         <p class="about-card-text">スムーズに情報共有</p>
                     </div>
@@ -214,13 +214,13 @@
                     </div>
                     <!-- Desktop Title (part of grid) -->
                     <div class="about-title pc-only">
-                        <h2 class="about-title">
+                        <div class="about-title">
                             <div class="about-title1"><span class="en-poppins">QuickCard</span>とは</div>
                             <div class="about-title2">名刺管理の面倒をゼロに。<br>
                                 新しい可能性は、<br>
                                 全部<span class="en-poppins">QuickCard</span>で繋がる。
                             </div>
-                        </h2>
+                        </div>
                     </div>
                     <div class="about-card card-item1">
                         <img src="img/photos/about1.avif" alt="スキャンするだけ">
@@ -499,7 +499,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
 
         <!--ご利用の流れ-->
@@ -612,11 +611,11 @@
   
         <div class="faq-contents">
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
-              <div class="faq-question-first">
+            <button id="faq-question-1" class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
+              <span class="faq-question-first">
                 <span class="q-icon en-poppins">Q</span>
                 QuickCardでは、どんなことができますか？
-              </div>
+              </span>
               <span class="faq-arrow">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="15" viewBox="0 0 24 15" fill="none">
                   <path d="M10.5309 13.4096C11.3227 14.2668 12.6773 14.2668 13.4691 13.4096L22.7553 3.3571C23.9386 2.07614 23.03 0 21.2861 0H2.71386C0.969993 0 0.061451 2.07614 1.24475 3.3571L10.5309 13.4096Z" fill="#C0C0C0"/>
@@ -628,11 +627,11 @@
             </div>
           </div>
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
-              <div class="faq-question-first">
+            <button id="faq-question-2" class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
+              <span class="faq-question-first">
                 <span class="q-icon en-poppins">Q</span>
                 何名で利用可能ですか？
-              </div>
+              </span>
               <span class="faq-arrow">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="15" viewBox="0 0 24 15" fill="none">
                   <path d="M10.5309 13.4096C11.3227 14.2668 12.6773 14.2668 13.4691 13.4096L22.7553 3.3571C23.9386 2.07614 23.03 0 21.2861 0H2.71386C0.969993 0 0.061451 2.07614 1.24475 3.3571L10.5309 13.4096Z" fill="#C0C0C0"/>
@@ -644,11 +643,11 @@
             </div>
           </div>
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
-              <div class="faq-question-first">
+            <button id="faq-question-3" class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
+              <span class="faq-question-first">
                 <span class="q-icon en-poppins">Q</span>
                 誤認識された名刺データは編集できますか？
-              </div>
+              </span>
               <span class="faq-arrow">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="15" viewBox="0 0 24 15" fill="none">
                   <path d="M10.5309 13.4096C11.3227 14.2668 12.6773 14.2668 13.4691 13.4096L22.7553 3.3571C23.9386 2.07614 23.03 0 21.2861 0H2.71386C0.969993 0 0.061451 2.07614 1.24475 3.3571L10.5309 13.4096Z" fill="#C0C0C0"/>
@@ -660,11 +659,11 @@
             </div>
           </div>
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
-              <div class="faq-question-first">
+            <button id="faq-question-4" class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
+              <span class="faq-question-first">
                 <span class="q-icon en-poppins">Q</span>
                 共有する名刺枚数に制限がありますか？
-              </div>
+              </span>
               <span class="faq-arrow">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="15" viewBox="0 0 24 15" fill="none">
                   <path d="M10.5309 13.4096C11.3227 14.2668 12.6773 14.2668 13.4691 13.4096L22.7553 3.3571C23.9386 2.07614 23.03 0 21.2861 0H2.71386C0.969993 0 0.061451 2.07614 1.24475 3.3571L10.5309 13.4096Z" fill="#C0C0C0"/>
