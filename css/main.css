@@ -891,8 +891,8 @@ First View
         border-radius: 100%;
         z-index: 3;
         background: var(--color-primary);
-        top: 20%;
-        left: 32%;
+        top: 22%;
+        left: 30%;
         transition: background-color 0.5s ease;
     }
     .dot2 {
@@ -913,7 +913,7 @@ First View
         border-radius: 100%;
         z-index: 3;
         background: var(--color-accent);
-        top: 80%;
+        top: 76%;
         left: 36%;
         transition: background-color 0.5s ease;
     }
@@ -926,7 +926,7 @@ First View
         width: 600px;
         height: 160px;
         top: -8%; 
-        left: -6%; 
+        left: -10%; 
     }
     .rec2 {
         z-index: 0;
@@ -945,9 +945,9 @@ First View
         background-color: var(--color-white);
         transform: rotate(25deg);
         border-radius: 100px; 
-        width: 1200px;
+        width: 1050px;
         height: 200px;
-        bottom: 20%;
+        bottom: 25%;
         left: -10%; 
     }
     /* .rec4 {
