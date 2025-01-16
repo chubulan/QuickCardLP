@@ -313,7 +313,7 @@ a {
 .feature-box {  /* Add feature-box here */
     opacity: 0;
     transform: translateY(50px);
-    transition: all 0.6s ease-out;
+    transition: all 0.4s ease-out;
 }
 /* Animation when element comes into view */
 #problems.in-view,
@@ -329,7 +329,7 @@ a {
 .about-card-mb {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.5s ease-out;
+    transition: all 0.3s ease-out;
 }
 .about-card-mb.in-view {
     opacity: 1;
@@ -339,12 +339,12 @@ a {
 .feature-number, .feature-title span, .feature-title h3, .feature-desc {
     opacity: 0;
     transform: translateX(-30px); 
-    transition: all 0.5s ease-out;
+    transition: all 0.3s ease-out;
 }
 .feature-box, .business-cards, .mockup-sp, .mockup-pc, .people-illust, .share-photos, .share-illust, .security-cards-container {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.5s ease-out;
+    transition: all 0.3s ease-out;
 }
 
 
@@ -692,12 +692,16 @@ header .container {
         display: flex;
         align-items: center;
         gap: 40px;
-        background-color: var(--color-white);
+        font-weight: 500;
         border-radius: 28px;
-        padding: 4px 24px;
+        padding: 4px 0;
+        padding-left: 24px;
+        padding-right: 4px;
         filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1)); 
     }
-
+    .header-nav--filled {
+        background-color: var(--color-white);
+    }
     header .container {
         padding: 16px 24px;
         max-width: none;
@@ -744,9 +748,27 @@ First View
 #firstview .container {
     display: flex;
     flex-direction: column;
-    gap: clamp(36px, 10vw, 60px);
+    gap: clamp(36px, 10vw, 48px);
 }
 /* Hero Content */
+.fvsmallwords {
+    font-size: 14px;
+    font-weight: 600;
+    position: relative;
+    padding-left: 20px;
+}
+.fvsmallwords::before {
+    content: "";
+    display: block; 
+    width: 8px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: var(--color-accent); 
+    position: absolute; 
+    left: 0; 
+    top: 50%;
+    transform: translateY(-50%); 
+}
 .hero-content {
     display: flex;
     flex-direction: column;
@@ -757,7 +779,7 @@ First View
 }
 .hero-content-desc {
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.8;
 }
 /* Key Visuals */
 .keyvisual {
@@ -899,24 +921,46 @@ First View
         position: absolute;
         z-index: 0;
         background-color: var(--color-white);
-        transform: rotate(20deg);
+        transform: rotate(25deg);
         border-radius: 100px; 
-        width: 480px;
+        width: 600px;
         height: 160px;
-        top: 16%; /* Adjust positioning as needed */
-        left: -14%; /* Move it leftwards */
+        top: -8%; 
+        left: -6%; 
     }
     .rec2 {
         z-index: 0;
         position: absolute;
         background-color: var(--color-white);
-        transform: rotate(20deg);
+        transform: rotate(25deg);
         border-radius: 100px; 
-        width: 480px;
+        width: 600px;
         height: 160px;
-        bottom: 12%;
-        left: -4%; /* Adjust for spacing between rectangles */
+        top: -4%;
+        right: 2%;
     }
+    .rec3 {
+        z-index: 0;
+        position: absolute;
+        background-color: var(--color-white);
+        transform: rotate(25deg);
+        border-radius: 100px; 
+        width: 1200px;
+        height: 200px;
+        bottom: 20%;
+        left: -10%; 
+    }
+    /* .rec4 {
+        z-index: 0;
+        position: absolute;
+        background-color: var(--color-white);
+        transform: rotate(25deg);
+        border-radius: 100px; 
+        width: 600px;
+        height: 160px;
+        bottom: 0%;
+        left: -4%; 
+    } */
     .hero-content  {
         animation: fadeUp 0.8s ease-out 0.8s forwards;
     }
@@ -935,10 +979,13 @@ First View
     #firstview {
         padding-top: 148px;
     }
+    .fvsmallwords {
+        font-size: 20px;
+    }
     .hero-content {
-        padding-top: 100px;
+        padding-top: 60px;
         width: 50%;
-        gap: 32px;
+        gap: 24px;
     }
     .hero-content h1 {
         font-size: 48px;
@@ -953,6 +1000,9 @@ First View
 @media (min-width: 1440px) {
     #firstview .container {
         padding: 0 60px;
+    }
+    #firstview {
+        padding-top: 128px;
     }
 }
 
@@ -1861,7 +1911,7 @@ Features
     .functions-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 60px 40px;
+        gap: 60px 80px;
         padding: 0 20px;
         align-items: center;
         justify-content: center;
@@ -1871,6 +1921,7 @@ Features
         flex-direction: column;
         align-items: flex-start;
         padding: 20px;
+        gap: 12px;
         width: 80%; 
         margin: 0 auto; 
     }

@@ -445,6 +445,7 @@ document.addEventListener('DOMContentLoaded', startAnimation);
 
 // Header adds white fill //
 const header = document.querySelector('.header');
+const headerNav = document.querySelector('.header-nav'); 
 
 // Get the height of the first section or viewport height
 const firstSection = document.querySelector('section') || { offsetHeight: window.innerHeight };
@@ -457,12 +458,19 @@ function isMobile() {
 // Function to handle scroll
 function handleScroll() {
     if (isMobile()) {
+        // Mobile behavior remains the same
         if (window.scrollY > threshold) {
             header.classList.add('header--scrolled');
         } else {
             header.classList.remove('header--scrolled');
         }
     } else {
+        // Desktop behavior: handle nav background
+        if (window.scrollY > threshold) {
+            headerNav.classList.add('header-nav--filled');
+        } else {
+            headerNav.classList.remove('header-nav--filled');
+        }
         // Remove the scrolled class on desktop regardless of scroll position
         header.classList.remove('header--scrolled');
     }
@@ -476,7 +484,6 @@ window.addEventListener('resize', handleScroll);
 
 // Run once on page load to set initial state
 handleScroll();
-
 
 
 
