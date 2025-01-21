@@ -1302,7 +1302,7 @@ About
         min-height: 150vh;
     }
     .about-content-wrapper {
-        margin-top: 60vh;  /* This creates the initial empty space */
+        margin-top: 50vh;  /* This creates the initial empty space */
         padding: 40vh 0;
     }
     /* Title */
