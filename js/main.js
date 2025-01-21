@@ -126,46 +126,6 @@ window.addEventListener('beforeunload', function() {
 
 
 
-// Underline for Mobile //
-document.addEventListener('DOMContentLoaded', function() {
-    const underlines = document.querySelectorAll('.underline');
-    const keyvisual = document.querySelector('.keyvisual');
-    
-    // Wait for keyvisual animation to complete before starting underline animations
-    keyvisual.addEventListener('animationend', () => {
-        // Add a small additional delay after keyvisual appears
-        setTimeout(() => {
-            // Initial fade in for underlines
-            underlines.forEach((underline, index) => {
-                setTimeout(() => {
-                    underline.classList.add('fade-in');
-                }, index * 100);
-            });
-
-            // Start observing for highlight animation after fade-in starts
-            setTimeout(() => {
-                // Intersection Observer for highlight animation
-                const underlineObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting && entry.target.classList.contains('fade-in')) {
-                            entry.target.classList.add('active');
-                        } else {
-                            entry.target.classList.remove('active');
-                        }
-                    });
-                }, {
-                    threshold: 0.7,
-                    rootMargin: '0px 0px -10% 0px'
-                });
-
-                // Start observing all underline elements
-                underlines.forEach(element => {
-                    underlineObserver.observe(element);
-                });
-            }, 500); // Wait for fade-in animations to mostly complete
-        }, 200); // Delay after keyvisual animation ends
-    }, { once: true }); // Ensure event listener only fires once
-});
 
 
 // KV image changing for Mobile //
@@ -319,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     animateElement(card, 300 * (index + 1));
                 });
                 if (mockupSp) {
-                    animateElement(mockupSp, 900);
+                    animateElement(mockupSp, 600);
                 }
 
                 // Feature 2: PC mockup and profile illustrations
@@ -342,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 shareIllusts.forEach((illust, index) => {
-                    animateElement(illust, 900 + (300 * index));
+                    animateElement(illust, 600 + (150 * index));
                 });
 
                 // Feature 4: Security Cards
@@ -488,7 +448,8 @@ handleScroll();
 
 
 
-// Ham menu //
+
+// Ham menu with animations
 document.addEventListener('DOMContentLoaded', function() {
     const hamburgerBtn = document.querySelector('.hamburger-menu');
     const header = document.querySelector('.header');
@@ -503,21 +464,22 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add click event listeners to all mobile menu links
         mobileMenuLinks.forEach(link => {
             link.addEventListener('click', function(e) {
-                e.preventDefault(); // Prevent default scroll behavior
+                e.preventDefault();
                 
-                // Get the target section id from the href
                 const targetId = this.getAttribute('href').substring(1);
                 const targetSection = document.getElementById(targetId);
                 
                 if (targetSection) {
-                    // First close the menu
+                    // Close menu with animation
                     toggleMenu();
                     
-                    // Then instantly scroll to the section
-                    window.scrollTo({
-                        top: targetSection.offsetTop - header.offsetHeight,
-                        behavior: "smooth"  // Use "instant" for no animation
-                    });
+                    // Delay scrolling until after menu close animation
+                    setTimeout(() => {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - header.offsetHeight,
+                            behavior: "smooth"
+                        });
+                    }, 600); // Increased delay to account for all items' animation
                 }
             });
         });
@@ -593,53 +555,104 @@ function resetDots() {
 // Logo's color switching //
 const logo = document.querySelector('.logo');
 const aboutSection = document.querySelector('#about');
+const ctaButton = document.querySelector('.btn-cta-big');
 
 function isDesktop() {
-    // Return true if screen width is larger than 768px (typical tablet/desktop breakpoint)
-    // You can adjust this value to match your specific breakpoint
     return window.matchMedia('(min-width: 1024px)').matches;
 }
 
+let isCtaHovered = false;
+
+function isLogoOverlappingCta() {
+    const logoRect = logo.getBoundingClientRect();
+    const ctaRect = ctaButton.getBoundingClientRect();
+
+    // Check if logo's center point is within the CTA button's area
+    const logoCenter = {
+        x: logoRect.left + logoRect.width / 2,
+        y: logoRect.top + logoRect.height / 2
+    };
+
+    return (
+        logoCenter.x >= ctaRect.left &&
+        logoCenter.x <= ctaRect.right &&
+        logoCenter.y >= ctaRect.top &&
+        logoCenter.y <= ctaRect.bottom
+    );
+}
+
 function updateLogoColor() {
-    // Only proceed if menu is not open AND we're on desktop
     if (!header.classList.contains('menu-open') && isDesktop()) {
-        // Get the logo's position
         const logoRect = logo.getBoundingClientRect();
         const logoCenter = logoRect.top + logoRect.height / 2;
         
-        // Get the about section's position
         const aboutRect = aboutSection.getBoundingClientRect();
-        const aboutTop = aboutRect.top;
-        const aboutBottom = aboutRect.bottom;
         
-        // Check if logo is within the about section
-        if (logoCenter >= aboutTop && logoCenter <= aboutBottom) {
+        // Check if logo is in the about section
+        if (logoCenter >= aboutRect.top && logoCenter <= aboutRect.bottom) {
             logo.classList.add('inverted');
-        } else {
+        } 
+        // Check if logo is over CTA button while it's being hovered
+        else if (isCtaHovered && isLogoOverlappingCta()) {
+            logo.classList.add('inverted');
+        }
+        else {
             logo.classList.remove('inverted');
         }
     } else if (!isDesktop()) {
-        // Remove inverted class on mobile regardless of position
         logo.classList.remove('inverted');
     }
 }
 
-// Update on scroll
+// Add event listeners for CTA button hover
+if (ctaButton) {
+    ctaButton.addEventListener('mouseenter', () => {
+        isCtaHovered = true;
+        updateLogoColor();
+    });
+
+    ctaButton.addEventListener('mouseleave', () => {
+        isCtaHovered = false;
+        updateLogoColor();
+    });
+}
+
+// Keep existing event listeners
 window.addEventListener('scroll', updateLogoColor);
-
-// Update on resize to handle switching between mobile and desktop
 window.addEventListener('resize', updateLogoColor);
-
-// Initial check on page load
 updateLogoColor();
 
-// Optional: Update when menu closes
 function onMenuToggle(isOpen) {
     if (!isOpen && isDesktop()) {
-        // When menu closes, check if we need to update logo color (only on desktop)
         updateLogoColor();
     }
 }
+
+
+
+/* About Animation*/
+document.addEventListener('DOMContentLoaded', () => {
+    const bgLogo = document.querySelector('.about-bg-logo');
+    
+    const handleScroll = () => {
+        const bounds = aboutSection.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+
+        // Show logo before entering the section for smooth reveal
+        if (bounds.top < viewportHeight && bounds.bottom > 0) {
+            bgLogo.style.visibility = 'visible';
+            bgLogo.style.opacity = '0.1';
+            // Keep transform consistent without scaling
+            bgLogo.style.transform = 'translate(-50%, -50%)';
+        } else {
+            bgLogo.style.visibility = 'hidden';
+            bgLogo.style.opacity = '0';
+        }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+});
 
 
 
