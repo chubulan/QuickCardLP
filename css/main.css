@@ -214,18 +214,18 @@ a {
 @media (hover: hover) and (pointer: fine) {
     .btn-cta:hover {
         background: var(--color-white);
-        color: var(--color-accent);
+        color: var(--color-grey);
         border-color: var(--color-accent);
     }
 
     .btn-nav:hover {
         background: var(--color-white);
-        color: var(--color-accent);
+        color: var(--color-grey);
         border-color: var(--color-accent);
     }
 
     .btn-cta:hover .btn-arrow path {
-        stroke: var(--color-accent);
+        stroke: var(--color-grey);
     }
 
     .btn-cta:hover .btn-arrow {
@@ -1302,8 +1302,8 @@ About
         min-height: 150vh;
     }
     .about-content-wrapper {
-        margin-top: 50vh;  /* This creates the initial empty space */
-        padding: 40vh 0;
+        margin-top: 15vh;  /* This creates the initial empty space */
+        padding: 30vh 0;
     }
     /* Title */
     .about-title {
