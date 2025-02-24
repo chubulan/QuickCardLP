@@ -170,10 +170,10 @@ a {
 }
 
 .btn-nav {
-    font-size: 14px;
+    font-size: 12px;
     border-radius: 24px;
     border: 1px solid var(--color-primary);
-    padding: 8px 16px;
+    padding: 8px 12px;
 }
 
 /* Base arrow styles */
@@ -498,7 +498,7 @@ header .container {
 }
 /* Logo */
 .logo {
-    width: 40px;
+    width: 32px;
     height: auto;
     position: relative; /* Add position relative for z-index context */
     z-index: 1002; /* Ensure logo stays above menu */
@@ -538,8 +538,8 @@ header .container {
 
 /* Hamburger Menu - Mobile/Tablet Only */
 .hamburger-menu {
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     background: var(--color-grey);
     border-radius: 50%;
     display: flex;
@@ -555,7 +555,7 @@ header .container {
     display: flex;
 }
 .hamburger-menu span {
-    width: 16px;
+    width: 14px;
     height: 2px;
     background: var(--color-white);
     transition: all 0.3s ease-in-out;
@@ -764,7 +764,7 @@ First View
 ============*/
 #firstview {
     position: relative;
-    padding-top: clamp(80px, 12vh, 120px);
+    padding-top: clamp(80px, 8vh, 120px);
     min-height: 100vh;
 }
 #firstview .container {
@@ -797,7 +797,7 @@ First View
     gap: 16px;
 }
 .hero-content h1 {
-    font-size: 32px;
+    font-size: 28px;
 }
 .hero-content-desc {
     font-size: 16px;
