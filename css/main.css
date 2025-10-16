@@ -35,6 +35,7 @@ img, svg {
     /* Colors */
     --color-primary: #2EA665;
     --color-accent: #BDF506;
+    --color-accent2: #9AD097;
     --color-black: #222222;
     --color-white: #FFFFFF;
     --color-grey: #C0C0C0;
@@ -172,7 +173,7 @@ a {
 .btn-nav {
     font-size: 12px;
     border-radius: 24px;
-    border: 1px solid var(--color-primary);
+    border: 2px solid var(--color-primary);
     padding: 8px 12px;
 }
 
@@ -190,19 +191,19 @@ a {
 @media (hover: none) {
     /* Active states for touch devices */
     .btn-cta:active {
-        background: var(--color-white);
-        color: var(--color-accent);
-        border-color: var(--color-accent);
+        background: var(--color-black);
+        color: var(--color-accent2);
+        border: 3px solid var(--color-accent2);
     }
 
     .btn-nav:active {
-        background: var(--color-white);
-        color: var(--color-accent);
-        border-color: var(--color-accent);
+        background: var(--color-black);
+        color: var(--color-accent2);
+        border: 2px solid var(--color-accent2);
     }
 
     .btn-cta:active .btn-arrow path {
-        stroke: var(--color-accent);
+        stroke: var(--color-accent2);
     }
 
     .btn-cta:active .btn-arrow {
@@ -213,19 +214,19 @@ a {
 /* Desktop hover styles */
 @media (hover: hover) and (pointer: fine) {
     .btn-cta:hover {
-        background: var(--color-white);
-        color: var(--color-grey);
-        border-color: var(--color-accent);
+        background: var(--color-black);
+        color: var(--color-accent2);
+        border: 3px solid var(--color-accent2);
     }
 
     .btn-nav:hover {
-        background: var(--color-white);
-        color: var(--color-grey);
-        border-color: var(--color-accent);
+        background: var(--color-black);
+        color: var(--color-accent2);
+        border: 2px solid var(--color-accent2);
     }
 
     .btn-cta:hover .btn-arrow path {
-        stroke: var(--color-grey);
+        stroke: var(--color-accent2);
     }
 
     .btn-cta:hover .btn-arrow {
@@ -498,27 +499,14 @@ header .container {
 }
 /* Logo */
 .logo {
-    width: 32px;
+    width: 60px;
     height: auto;
     position: relative; /* Add position relative for z-index context */
     z-index: 1002; /* Ensure logo stays above menu */
 }
-/* Logo states */
-.logo-black {
-    display: block;
-    transition: display 0.3s ease-in-out;
-}
-.logo-white {
-    display: none;
-    transition: display 0.3s ease-in-out;
-}
-/* Scroll State - when logo is in dark section */
-.logo.inverted:not(.header.menu-open) .logo-black {
-    display: none;
-}
-
-.logo.inverted:not(.header.menu-open) .logo-white {
-    display: block;
+.logo img {
+    width: 64px;
+    max-width: 80px;
 }
 
 
@@ -663,13 +651,6 @@ header .container {
 
 
 /* Menu Open State */
-.header.menu-open .logo-black {
-    display: none;
-}
-
-.header.menu-open .logo-white {
-    display: block;
-}
 .header.menu-open .mobile-menu {
     opacity: 1;
     visibility: visible;
@@ -999,7 +980,7 @@ First View
         gap: 24px;
     }
     .hero-content h1 {
-        font-size: 48px;
+        font-size: 44px;
     }
     .hero-content-desc {
         font-size: 18px;
@@ -1591,7 +1572,7 @@ Features
     .business-cards:nth-child(1) {
         top: -20%;
         left: 16%;
-        transform: rotate(5deg);
+        transform: rotate(20deg);
     }
     .business-cards:nth-child(2) {
         bottom: 8%;
@@ -1965,7 +1946,7 @@ Features
     }
     .functions-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 60px 80px;
         padding: 0 20px;
         align-items: center;
@@ -2385,15 +2366,9 @@ Download
     font-weight: 600;
 }
 
-.btn-cta-storebtn {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-}
-
-.storebtn {
-    width: 100px;
-    height: auto;
+.btn-cta-special {
+    background: var(--color-black);
+    border: 2px solid var(--color-black);
 }
 
 
@@ -2424,6 +2399,11 @@ Download
 @media (hover: hover) and (pointer: fine) {
     .btn-cta-big:hover {
         background: var(--color-black);
+    }
+
+    .btn-cta-big:hover .btn-cta-special {
+        background: var(--color-primary);
+        border: 2px solid var(--color-primary);
     }
 
     .btn-cta-big:hover .hover-btn-illust,
@@ -2466,15 +2446,6 @@ Download
         font-size: clamp(24px, 4vw, 40px);
         margin-bottom: clamp(20px, 3vw, 32px);
         line-height: 1.5;
-    }
-
-    .btn-cta-storebtn {
-        gap: 28px;
-    }
-    
-    .storebtn {
-        width: 180px;
-        height: auto;
     }
 
     .btn-cta-illust {
@@ -2716,7 +2687,8 @@ Footer
     margin-bottom: 16px;
 }
 .footer-logo {
-    max-width: 64px;
+    width: 88px;
+    height: auto;
 }
 .footer-content {
     display: flex;
@@ -2819,7 +2791,7 @@ Footer
         gap: 48px;
     }
     .footer-logo {
-        max-width: 80px;
+        width: 100px;
     }
     .footer-content {
         flex: 0.85;
