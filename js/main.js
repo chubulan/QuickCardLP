@@ -961,3 +961,50 @@ class ColorTransition {
 document.addEventListener('DOMContentLoaded', () => {
     new ColorTransition();
 });
+
+// Platform detection for all download buttons
+function updateAllDownloadLinks() {
+  const userAgent = navigator.userAgent.toLowerCase();
+  const isMobile = /iphone|ipad|ipod|android/.test(userAgent);
+  
+  console.log('User Agent:', userAgent); // Debug
+  console.log('Is Mobile:', isMobile); // Debug
+  
+  let appStoreUrl;
+  
+  if (isMobile) {
+    // Determine which app store based on device
+    if (userAgent.includes('iphone') || userAgent.includes('ipad') || userAgent.includes('ipod')) {
+      // iOS - Apple App Store
+      appStoreUrl = 'https://apps.apple.com/app/id6753864540';
+      console.log('iOS detected - using App Store'); // Debug
+    } else if (userAgent.includes('android')) {
+      // Android - Google Play Store
+      appStoreUrl = 'https://play.google.com/store/apps/details?id=your.app.id';
+      console.log('Android detected - using Play Store'); // Debug
+    }
+    
+    // Update the mobile nav button (ダウンロード button in header)
+    const mobileNavButton = document.getElementById('mobile-nav-button');
+    if (mobileNavButton) {
+      mobileNavButton.href = appStoreUrl;
+      console.log('Updated mobile nav button'); // Debug
+    } else {
+      console.log('Mobile nav button not found!'); // Debug
+    }
+    
+    // Update all "今すぐ始める" buttons
+    const downloadButtons = document.querySelectorAll('.js-download-link');
+    console.log('Found download buttons:', downloadButtons.length); // Debug
+    
+    downloadButtons.forEach((button, index) => {
+      button.href = appStoreUrl;
+      console.log('Updated button', index + 1); // Debug
+    });
+  } else {
+    console.log('Desktop detected - keeping website URLs'); // Debug
+  }
+}
+
+// Call on page load
+document.addEventListener('DOMContentLoaded', updateAllDownloadLinks);
